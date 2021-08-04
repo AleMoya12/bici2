@@ -57,34 +57,11 @@ function crearElemento(dato) {
     
     //creo la plantilla del contenido
     nuevoElemento.innerHTML = `
-    <div class="product__item">
-    <div class="product__item__pic set-bg" data-setbg="${dato.img}">
-        <div class="label new">New</div>
-        <ul class="product__hover">
-            <li><a href="${dato.img}" class="image-popup"><span class="arrow_expand"></span></a></li>
-            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-        </ul>
-    </div>
-    <div class="product__item__text">
-        <h6><a href="#">${dato.nombre}</a></h6>
-        <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-        </div>
-        <div class="product__price">$ ${dato.precio}</div>
-    </div>
-</div>
-
-
                 <div class="product-item">
                   <div class="pi-img-wrapper">
                     <img src="${dato.img}" class="img-responsive" alt="${dato.nombre}">
                     <div>
-                        <a href="${dato.img}" class="btn btn-default fancybox-button">Zoom</a>
+                        <a href="${dato.img}" class="btn btn-default image-popup"">Zoom</a>
                         <a href="#product-pop-up" class="btn btn-default fancybox-fast-view" ><button id="${dato.id}" class="btnVer" style="background: transparent; border: none; outline: none">View</button></a>
                     </div>
                   </div>
