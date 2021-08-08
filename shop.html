@@ -227,20 +227,23 @@
                         </div>
                         <div class="sidebar__filter">
                             <div class="section-title">
-                                <h4>Shop by price</h4>
+                                <h4>Ordenar por precio</h4>
                             </div>
                             <div class="filter-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="33" data-max="99"></div>
+                                data-min="50" data-max="10000">
+                                <input type="range" style="width: 100%;" id="rango">
+                            </div>
                                 <div class="range-slider">
-                                    <div class="price-input">
-                                        <p>Price:</p>
-                                        <input type="text" id="minamount">
-                                        <input type="text" id="maxamount">
+                                    <div class="price-input" style="width: 400px;">
+                                        <p>Precio:</p>
+                                        <input type="number" id="valor" value="100">
+                                        <input type="text" id="minamount" >
+                                        <input type="text" id="maxamount" >
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">Filter</a>
+                            <button id="queryLista" style="border-color: red; padding: 5px 10px;">Filtrar</button>
                         </div>
                         <div class="sidebar__sizes">
                             <div class="section-title">
@@ -350,9 +353,7 @@
         </div>
     </section>
     <!-- Shop Section End -->
-<div id="product-pop-up" >
 
-</div>
     <!-- Instagram Begin -->
     <div class="instagram">
         <div class="container-fluid">
@@ -496,9 +497,7 @@
     var myModal = document.getElementById('myModal')
 var myInput = document.getElementById('myInput')
 
-myModal.addEventListener('shown.bs.modal', function () {
-  myInput.focus()
-})
+
 </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>

@@ -3,12 +3,8 @@
 
 let total = 0;
 const PREFIJO = "productoID";
-const CARRITO = [];
-const carritoStorage = [];
 let listaDatos = [];
-let almacenados = "";
-let cantidades = 0;
-let totalcantidad = 0;
+
 
 
 //MUESTRO LOS PRUDUCTOS POR DOM
@@ -23,25 +19,47 @@ $(document).ready(function () {
     console.log(estado);
     if (estado === "success") {
       listaDatos = respuesta;
+
+      //ORDENO POR GENERO
+      let ordenado = listaDatos.filter(x => x.orientacion === "Masculino");
+        console.log(ordenado);
+
+       
       //AGREGAMOS UN NUEVO ELEMENTO AL HTML POR CADA REGISTRO DE DATO ESTATICO
-      for (const bici of listaDatos) {
+      
+      for (const bici of ordenado) {
         $(contenedorProduct).append(crearElemento(bici));
       }
-      //DETECTAR EVENTOS DE VER
-      let botones = document.getElementsByClassName("btnVer");
-      console.log(botones);
-      for (const boton of botones) {
-        boton.onclick = manejadorVista;
+      
+      const rango = document.querySelector("#rango");
+      const valor = document.querySelector("#valor");
+      rango.oninput = () =>{
+        valor.innerHTML =rango.value
       }
+      $("#queryLista").click(function (e) { 
+        let min = $("#minamount").val();
+        console.log(min);
+        console.log(ordenado);
+        let max = $("#maxamount").val();
 
-      if ($("#ordenar > option[value=3]").attr("selected", true)) {
+        const filtrados = ordenado.filter(producto => (producto.precio > min) &&  (producto.precio < max));
+        console.log(filtrados);
+       
+        for (const bici of filtrados) {
+          $(contenedorProduct).append(crearElemento(bici));
+        }
+    });
+    
+      /* if ($("#ordenar > option[value=3]").attr("selected", true)) {
         let ordPrecioMenor = listaDatos.sort((precioUno, precioDos) => precioUno.precio - precioDos.precio);
         console.log(ordPrecioMenor);
 
         for (const bici of ordPrecioMenor) {
           $(contenedorProduct).append(crearElemento(bici));
         }
-      };
+      }; */
+
+
     }
   }
   );
@@ -50,10 +68,11 @@ $(document).ready(function () {
 
 //funcion para crear en elemento del DOM
 function crearElemento(dato) {
-
-  let nuevoElemento = document.createElement("div");
+  
+  nuevoElemento = document.createElement("div");
   nuevoElemento.classList.add("col-md-6");
   nuevoElemento.classList.add("col-lg-4");
+  nuevoElemento.classList.add("mt-2");
 
   //creo la plantilla del contenido
   nuevoElemento.innerHTML = `
@@ -61,22 +80,23 @@ function crearElemento(dato) {
                   <div class="pi-img-wrapper">
                     <img src="${dato.img}" class="img-responsive" alt="${dato.nombre}">
                     <div>
-                        <a href="${dato.img}" class="btn btn-default image-popup"">Zoom</a>
-                        <a href="#product-pop-up" class="btn btn-default fancybox-fast-view" ><button id="${dato.id}" class="btnVer" style="background: transparent; border: none; outline: none">View</button></a>
+                        <a href="${dato.img}" class="btn btn-outline-success image-popup m-1"">Zoom</a>
+                        
+                        
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
+                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal${dato.id}">
+  Ver más!!!
 </button>
                     </div>
                   </div>
                   <h3><a href="shop-item.html">${dato.nombre}</a></h3>
                   <div class="pi-price">$ ${dato.precio}</div>
-                  <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                  <a href="javascript:;" class="btn btn-success add2cart">Comprar</a>
                 </div>
 
                 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade" id="exampleModal${dato.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">${dato.nombre}</h5>
@@ -90,24 +110,29 @@ function crearElemento(dato) {
           <div class="product-main-image">
             <img src="${dato.img}" alt="${dato.nombre}" class="img-responsive">
           </div>
-          <div class="product-other-images">
-            <a href="javascript:;" class="active"><img alt="${dato.nombre}" src="${dato.img}"></a>
-            <a href="javascript:;"><img alt="${dato.nombre}" src="${dato.img}"></a>
-            <a href="javascript:;"><img alt="${dato.nombre}" src="${dato.img}"></a>
-          </div>
+           <div class="product-other-images">
+            <a href="javascript:;" class="active"><img alt="${dato.nombre}" src="${dato.img1}"></a>
+            <a href="javascript:;"><img alt="${dato.nombre}" src="${dato.img2}"></a>
+            <a href="javascript:;"><img alt="${dato.nombre}" src="${dato.img3}"></a>
+            <a href="javascript:;"><img alt="${dato.nombre}" src="${dato.img4}"></a>
+            <a href="javascript:;"><img alt="${dato.nombre}" src="${dato.img5}"></a>
+            <a href="javascript:;"><img alt="${dato.nombre}" src="${dato.img6}"></a>
+            <a href="javascript:;"><img alt="${dato.nombre}" src="${dato.img7}"></a>
+            
+          </div> 
         </div>
         <div class="col-md-6 col-sm-6 col-xs-9">
           <h1>${dato.nombre}</h1>
           <div class="price-availability-block clearfix">
             <div class="price">
               <strong><span>$</span>${dato.precio}</strong>
-              <em>$<span>62.00</span></em>
+             
             </div>
             <div class="availability">
-              Availability: <strong>In Stock</strong>
+              Disponibilidad: <strong>En Stock</strong>
             </div>
           </div>
-          <div class="description">
+          <div class="description mt-1">
             <p>Lorem ipsum dolor ut sit ame dolore  adipiscing elit, sed nonumy nibh sed euismod laoreet dolore magna aliquarm erat volutpat 
   Nostrud duis molestie at dolore.</p>
           </div>
@@ -130,11 +155,9 @@ function crearElemento(dato) {
             </div>
           </div>
           <div class="product-page-cart">
-            <div class="product-quantity">
-                <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
-            </div>
-            <button class="btn btn-primary" type="submit">Add to cart</button>
-            <a href="shop-item.html" class="btn btn-default">More details</a>
+           
+            <button class="btn btn-success m-2" type="submit">Comprar</button>
+            
           </div>
         </div>
   
@@ -145,97 +168,18 @@ function crearElemento(dato) {
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        
     </div>
   </div>
 </div>
                `;
+               
   //agrego cada nodo creado al padre
   contenedorProduct.appendChild(nuevoElemento);
 
 
 }
 //EVENTO AL HACER CLICK A VER
-let productPopUp = document.getElementById("product-pop-up");
-function manejadorVista(evento) {
-  //determino el id del seleccionado
-  //let seleccionado = evento.target.id;
-  let seleccionado = listaDatos.find(objeto => objeto.id == evento.target.id);
-  console.log(seleccionado);
-  productPopUp.innerHTML = "";
-  let nuevaVista = document.createElement("div");
-  nuevaVista.classList.add("product-page");
-  nuevaVista.classList.add("product-pop-up");
 
 
-  nuevaVista.innerHTML = `
-    <div class="product-page product-pop-up">
-    <div class="row">
-      <div class="col-md-6 col-sm-6 col-xs-3">
-        <div class="product-main-image">
-          <img src="${seleccionado.img}" alt="${seleccionado.nombre}" class="img-responsive">
-        </div>
-        <div class="product-other-images">
-          <a href="javascript:;" class="active"><img alt="${seleccionado.nombre}" src="${seleccionado.img}"></a>
-          <a href="javascript:;"><img alt="${seleccionado.nombre}" src="${seleccionado.img}"></a>
-          <a href="javascript:;"><img alt="${seleccionado.nombre}" src="${seleccionado.img}"></a>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6 col-xs-9">
-        <h1>${seleccionado.nombre}</h1>
-        <div class="price-availability-block clearfix">
-          <div class="price">
-            <strong><span>$</span>${seleccionado.precio}</strong>
-            <em>$<span>62.00</span></em>
-          </div>
-          <div class="availability">
-            Availability: <strong>In Stock</strong>
-          </div>
-        </div>
-        <div class="description">
-          <p>Lorem ipsum dolor ut sit ame dolore  adipiscing elit, sed nonumy nibh sed euismod laoreet dolore magna aliquarm erat volutpat 
-Nostrud duis molestie at dolore.</p>
-        </div>
-        <div class="product-page-options">
-          <div class="pull-left">
-            <label class="control-label">Size:</label>
-            <select class="form-control input-sm">
-              <option>L</option>
-              <option>M</option>
-              <option>XL</option>
-            </select>
-          </div>
-          <div class="pull-left">
-            <label class="control-label">Color:</label>
-            <select class="form-control input-sm">
-              <option>Red</option>
-              <option>Blue</option>
-              <option>Black</option>
-            </select>
-          </div>
-        </div>
-        <div class="product-page-cart">
-          <div class="product-quantity">
-              <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
-          </div>
-          <button class="btn btn-primary" type="submit">Add to cart</button>
-          <a href="shop-item.html" class="btn btn-default">More details</a>
-        </div>
-      </div>
-
-      <div class="sticker sticker-sale"></div>
-    </div>
-  </div>
-    `;
-
-  productPopUp.appendChild(nuevaVista);
-
-};
-var myModal = document.getElementById('myModal')
-var myInput = document.getElementById('myInput')
-
-myModal.addEventListener('shown.bs.modal', function () {
-  myInput.focus()
-})
