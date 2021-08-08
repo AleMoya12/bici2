@@ -44,6 +44,9 @@ https://flickity.metafizzy.co
   height: 100%;
 }
 
+.active22{
+  font-weight: bold;
+}
 /* draggable */
 
 .flickity-enabled.is-draggable {

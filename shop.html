@@ -139,17 +139,21 @@
                                 <div class="accordion" id="accordionExample">
                                     <div class="card">
                                         <div class="card-heading active">
-                                            <a data-toggle="collapse" data-target="#collapseOne">Women</a>
+                                            <a data-toggle="collapse" data-target="#collapseOne">Género</a>
                                         </div>
                                         <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
                                             <div class="card-body">
-                                                <ul>
-                                                    <li><a href="#">Coats</a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
+                                                <ul class="category_list">
+                                                    <li class="category_item" category="all" style="cursor: pointer;">Todos</li>
+                                                    <li class="category_item" category="Masculino" style="cursor: pointer;">Masculino</li>
+                                                    <li class="category_item" category="Femenino" style="cursor: pointer;">Femenino</li>
+                                                    <li class="category_item" category="Infantil" style="cursor: pointer;">Infantil</li>
+                                                    <!-- <li><a href="" class="category_item" category="infantil">Infantil</a></li> -->
+                                                   <!--  <li><a href="" class="category_item" category="Mujer">Mujer</a></li>
+                                                    <li><a href="" class="category_item" category="infantil">Infantil</a></li> -->
+                                                   <!--  <li><a href="#">Shirts</a></li>
                                                     <li><a href="#">T-shirts</a></li>
-                                                    <li><a href="#">Jeans</a></li>
+                                                    <li><a href="#">Jeans</a></li> -->
                                                 </ul>
                                             </div>
                                         </div>
@@ -230,22 +234,24 @@
                                 <h4>Ordenar por precio</h4>
                             </div>
                             <div class="filter-range-wrap">
-                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                               <!--  <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                 data-min="50" data-max="10000">
-                                <input type="range" style="width: 100%;" id="rango">
-                            </div>
+                                <input type="range"  id="rango">
+                            </div> -->
                                 <div class="range-slider">
-                                    <div class="price-input" style="width: 400px;">
+                                    <div class="price-input" style="width: 450px;">
                                         <p>Precio:</p>
-                                        <input type="number" id="valor" value="100">
-                                        <input type="text" id="minamount" >
-                                        <input type="text" id="maxamount" >
+                                       <!--  <input type="number" id="valor" value="100"> -->
+                                       <input id="minQuery" type="number" value="0"> 
+                                       <input id="maxQuery" type="number" value="10000"> 
+                                      
                                     </div>
                                 </div>
                             </div>
-                            <button id="queryLista" style="border-color: red; padding: 5px 10px;">Filtrar</button>
+                            <button id="queryLista"  style="border-color: red; padding: 5px 10px;">Buscar</button>
+                            <!-- <button id="queryLista">Filtrar</button> -->
                         </div>
-                        <div class="sidebar__sizes">
+                       <!--  <div class="sidebar__sizes">
                             <div class="section-title">
                                 <h4>Shop by size</h4>
                             </div>
@@ -291,8 +297,8 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                        </div>
-                        <div class="sidebar__color">
+                        </div> -->
+                      <!--   <div class="sidebar__color">
                             <div class="section-title">
                                 <h4>Shop by size</h4>
                             </div>
@@ -338,7 +344,7 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-9">

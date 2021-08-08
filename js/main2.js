@@ -21,44 +21,60 @@ $(document).ready(function () {
       listaDatos = respuesta;
 
       //ORDENO POR GENERO
-      let ordenado = listaDatos.filter(x => x.orientacion === "Masculino");
-        console.log(ordenado);
+      /* let ordenado = listaDatos.filter(x => x.orientacion === "Masculino");
+        console.log(ordenado); */
 
-       
+
       //AGREGAMOS UN NUEVO ELEMENTO AL HTML POR CADA REGISTRO DE DATO ESTATICO
-      
-      for (const bici of ordenado) {
+
+      for (const bici of listaDatos) {
         $(contenedorProduct).append(crearElemento(bici));
       }
-      
-      const rango = document.querySelector("#rango");
+
+      /* const rango = document.querySelector("#rango");
       const valor = document.querySelector("#valor");
       rango.oninput = () =>{
         valor.innerHTML =rango.value
-      }
-      $("#queryLista").click(function (e) { 
-        let min = $("#minamount").val();
+      } */
+      $("#queryLista").click(function (e) {
+        let min = $("#minQuery").val();
         console.log(min);
         console.log(ordenado);
-        let max = $("#maxamount").val();
+        let max = $("#maxQuery").val();
 
-        const filtrados = ordenado.filter(producto => (producto.precio > min) &&  (producto.precio < max));
+        const filtrados = ordenado.filter(producto => (producto.precio > min) && (producto.precio < max));
         console.log(filtrados);
-       
+        $("#container-productos").empty();
         for (const bici of filtrados) {
           $(contenedorProduct).append(crearElemento(bici));
         }
-    });
-    
-      /* if ($("#ordenar > option[value=3]").attr("selected", true)) {
-        let ordPrecioMenor = listaDatos.sort((precioUno, precioDos) => precioUno.precio - precioDos.precio);
-        console.log(ordPrecioMenor);
+      });
 
-        for (const bici of ordPrecioMenor) {
+      //ordenar por genero
+      $('.category_list .category_item[category="all"]').addClass('.active22');
+      $('.category_item').click(function () {
+        var catProduct = $(this).attr('category');
+        console.log(catProduct);
+
+        let ordenado = listaDatos.filter(x => x.genero === catProduct);
+        console.log(ordenado);
+        //oculto productos
+        $("#container-productos").empty();
+        for (const bici of ordenado) {
           $(contenedorProduct).append(crearElemento(bici));
         }
-      }; */
 
+
+
+
+      });
+      $('.category_item[category="all"]').click(function () {
+        $("#container-productos").empty();
+        for (const bici of listaDatos) {
+          $(contenedorProduct).append(crearElemento(bici));
+        }
+
+      });
 
     }
   }
@@ -68,7 +84,7 @@ $(document).ready(function () {
 
 //funcion para crear en elemento del DOM
 function crearElemento(dato) {
-  
+
   nuevoElemento = document.createElement("div");
   nuevoElemento.classList.add("col-md-6");
   nuevoElemento.classList.add("col-lg-4");
@@ -76,7 +92,7 @@ function crearElemento(dato) {
 
   //creo la plantilla del contenido
   nuevoElemento.innerHTML = `
-                <div class="product-item">
+                <div class="product-item" category="${dato.genero}">
                   <div class="pi-img-wrapper">
                     <img src="${dato.img}" class="img-responsive" alt="${dato.nombre}">
                     <div>
@@ -174,7 +190,7 @@ function crearElemento(dato) {
   </div>
 </div>
                `;
-               
+
   //agrego cada nodo creado al padre
   contenedorProduct.appendChild(nuevoElemento);
 
