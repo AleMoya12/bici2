@@ -39,10 +39,10 @@ $(document).ready(function () {
       $("#queryLista").click(function (e) {
         let min = $("#minQuery").val();
         console.log(min);
-        console.log(ordenado);
+        
         let max = $("#maxQuery").val();
 
-        const filtrados = ordenado.filter(producto => (producto.precio > min) && (producto.precio < max));
+        const filtrados = listaDatos.filter(producto => (producto.precio > min) && (producto.precio < max));
         console.log(filtrados);
         $("#container-productos").empty();
         for (const bici of filtrados) {
